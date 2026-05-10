@@ -1,0 +1,49 @@
+# Байт-код Python (ускоряет запуск, не нужен в репозитории)
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Виртуальные окружения (самые частые названия)
+venv/
+.venv/
+env/
+ENV/
+bin/
+lib/
+
+# Распределения и пакеты
+dist/
+build/
+*.egg-info/
+
+# Файлы окружения (чувствительные данные: пароли, API-ключи)
+.env
+.venv
+.env.local
+
+# Настройки IDE (PyCharm, VS Code)
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Логи и базы данных (если используете SQLite локально)
+*.log
+*.sqlite3
+
+# Специфические папки инструментов (pytest, mypy)
+.pytest_cache/
+.mypy_cache/
+.tox/
+.coverage
+htmlcov/
+
+# Сгенерированные файлы
+out/*.txt
+out/*.log
+
+# Временные файлы
+temp/
+
+# Старые файлы
+old/
