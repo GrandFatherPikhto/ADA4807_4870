@@ -57,6 +57,10 @@ def generate_report(config: dict, combo: dict, sim_info: dict, output_dir: str =
         "Файлы:",
         f"  CSV с сигналами: {sim_info.get('csv_path', 'N/A')}",
         f"  Лог LTSpice:     {sim_info.get('log_path', 'N/A')}",
+        f"  CSV с сигналами: {sim_info.get('csv_path', 'N/A')}",
+        f"  Лог LTSpice:     {sim_info.get('log_path', 'N/A')}",
+        f"  Netlist (очищенный):    {sim_info.get('clean_net_path', 'N/A')}",
+        f"  Netlist (читаемый):    {sim_info.get('readable_net_path', 'N/A')}",
         "=" * 60
     ]
 

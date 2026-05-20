@@ -83,3 +83,29 @@ def plot_degradation(frequencies: list[float], thd_list: list[float]):
     plt.ylabel('THD (%)')
     plt.grid(True, which='both', linestyle='--')
     plt.show()
+
+def plot_input_currents(csv_path: str, r_tia: float):
+    """
+    Строит графики токов IOUTA и IOUTB, вычисляя их по напряжениям.
+    """
+    logger.info(f"Построение графиков токов из {csv_path}, R_TIA={r_tia} Ом")
+    df = pd.read_csv(csv_path)
+
+    required = ['V(inn)', 'V(n001)', 'V(inp)', 'V(n002)']
+    if not all(col in df.columns for col in required):
+        logger.warning("В CSV нет нужных колонок для вычисления токов. Пропускаем.")
+        return
+
+    iouta = (df['V(n001)'] - df['V(inn)']) / r_tia
+    ioutb = (df['V(n002)'] - df['V(inp)']) / r_tia
+    time_us = df['Time'] * 1e6
+
+    plt.figure(figsize=(10, 5))
+    plt.plot(time_us, iouta, label='IOUTA', color='blue')
+    plt.plot(time_us, ioutb, label='IOUTB', color='red', linestyle='--')
+    plt.xlabel('Время (мкс)')
+    plt.ylabel('Ток (А)')
+    plt.title('Входные токи IOUTA и IOUTB (расчёт по напряжениям)')
+    plt.grid(True)
+    plt.legend()
+    plt.show()

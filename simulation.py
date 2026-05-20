@@ -101,11 +101,19 @@ class LTspiceRunner:
         editor.set_parameter('RfVal', str(params['Rf_e96']))
         editor.set_parameter('RloadVal', str(params['R_load']))
 
+        # После установки RfVal, RloadVal и т.д.
+        editor.set_component_value('Rfn', str(params['R_TIA']))   # Rfn = R_TIA (249 Ом)
+        editor.set_component_value('Rfp', str(params['R_TIA']))   # Rfp = R_TIA
+        editor.set_component_value('Cf', f"{params['Cf']}p")      # Cf в пикофарадах
+
         # Устанавливаем конкретные номиналы компонентов (если в схеме есть имена)
         editor.set_component_value('Ra', str(params['Ra']))
         editor.set_component_value('Rb', str(params['Rb_e96']))
         # Cf ожидается в формате "2p" -> передаём как есть с суффиксом 'p'
         editor.set_component_value('Cf', f"{params['Cf']}p")
+
+
+        # editor.add_instruction(".save I(B§IOUTA) I(B§IOUTB)")   # сохраняем токи источников
 
         logger.debug("Параметры редактора установлены, запуск LTspice...")
 
