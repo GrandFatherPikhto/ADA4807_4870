@@ -781,17 +781,17 @@ FREQ  & 1~МГц  & Частота сигнала \\
 ]
     % График для V(inn)
     \addplot[red, thick] table [
-        x index=0, 
-        y index=2,
+        x=Time,
+        y=V(inn),
         % each nth point=10 % Раскомментируйте, если файл очень тяжелый
-    ] {./data/data.csv};
+    ] {./data/ada4870_raw_export.csv};
     \addlegendentry{$V(inn)$}
 
     % График для V(inp)
     \addplot[blue, thick] table [
-        x index=0, 
-        y index=3
-    ] {./data/data.csv};
+        x=Time,
+        y=V(inp)
+    ] {./data/ada4870_raw_export.csv};
     \addlegendentry{$V(inp)$}
     
     \legend{\(V_{inn}\), \(V_{inp}\)}
@@ -818,8 +818,8 @@ FREQ  & 1~МГц  & Частота сигнала \\
 ]
     % График для V(signal)
     \addplot[green!50!black, thick] table [
-        x index=0, 
-        y index=13] {./data/data.csv};
+        x=Time,
+        y=V(signal)] {./data/ada4870_raw_export.csv};
 
     \addlegendentry{$V_{signal}$}
    
@@ -835,7 +835,7 @@ FREQ  & 1~МГц  & Частота сигнала \\
 \begin{axis}[
     width=12cm, height=7cm,
     xlabel={Время (с)},
-    ylabel={Ток \(R_{load}\) (mA)},
+    ylabel={Ток \(R_{load}\) (А)},
     grid=major,
     legend pos=north east,
     % Настройка разделителя (для CSV это запятая)
@@ -843,11 +843,9 @@ FREQ  & 1~МГц  & Частота сигнала \\
 ]
     % График для I(load)
     \addplot[brown, thick] table [
-        x index=0, 
-        y index=31] {./data/data.csv};
+        x=Time,
+        y=I(Rload)] {./data/ada4870_raw_export.csv};
 
-    \addlegendentry{$V_{signal}$}
-   
     \legend{\(I_{load}\)}
 \end{axis}
 \end{tikzpicture}
@@ -876,8 +874,8 @@ FREQ  & 1~МГц  & Частота сигнала \\
 ]
     % Загрузка данных из CSV, который создаётся при degradation_sweep
     \addplot[blue, thick, mark=*] table [
-        x=Frequency_Hz, 
-        y=THD_%
+        x=Frequency_Hz,
+        y index=1
     ] {./data/thd_vs_freq.csv};
     \legend{THD}
 \end{axis}
