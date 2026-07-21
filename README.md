@@ -15,6 +15,12 @@ Manual selection of components for precision analog signal paths is slow, prone 
 * **Native `.asc` Graph Parser:** Built a robust text parser that bypasses the limitations of standard LTspice netlists. It auto-detects binary encodings (UTF-16LE/ASCII) and reconstructs the circuit graph by binding symbol pins to topological nets.
 the story of how it was once misdiagnosed precisely due to the lack of such a tool).
 
+> [!IMPORTANT]
+> **Comprehensive Technical Whitepaper Available:**  
+> A full R&D design study with detailed mathematical calculations, LTspice circuit schematics, and harmonic spectrum analysis is available in the official documentation.  
+> 📄 **[Read the Full Engineering Report (PDF)](https://github.com/GrandFatherPikhto/ADASym/blob/main/docs/pdf/readme.pdf)**
+
+
 ## What the Signal Path Actually Does
 
 ```
