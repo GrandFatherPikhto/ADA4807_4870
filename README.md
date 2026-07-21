@@ -2,13 +2,18 @@
 
 A tool for component selection and LTspice verification of the output stage of a sinusoidal signal generator: DAC (AD9705) → transimpedance stage (ADA4807-2) → high-current buffer (ADA4870). Used in the HiPIMS generator anode driver project (Bauman MSTU laboratory).
 
-## Why This Tool Exists
+# ADASym — Hardware R&D Automation & SPICE Simulation Pipeline
 
-There are three specific tasks that are time-consuming and error-prone to do manually:
+### 🚀 Why choose this over manual hardware design?
+Manual selection of components for precision analog signal paths is slow, prone to rounding errors, and requires endless clicking in SPICE GUI. 
 
-1. **Select Ra/Rf/Rb/Cf values** for a target amplitude and load current, rounded to the real E96 series — so you don't have to recalculate each time in a notebook.
-2. **Run a realistic LTspice simulation** with these values and extract THD, waveform shape, and harmonic spectrum — without manually opening the GUI for each variant.
-3. **Parse the circuit itself (.asc)** and produce a readable list of "which pin of which component is connected to which net" — without manual coordinate tracing, which has previously led to incorrect conclusions (see the "Gain Asymmetry" section below for the story of how it was once misdiagnosed precisely due to the lack of such a tool).
+**ADASym solves this by automating the entire R&D pipeline:** It mathematically calculates ideal E96-series components for a high-speed DAC-to-Buffer signal path, automatically generates and runs LTspice simulations via Python, extracts sub-harmonic distortion (THD/FFT data), and parses native `.asc` schematics directly into clean, human-readable netlists.
+
+### 🛠️ Core Engineering Highlights:
+* **Physics & Hardware Co-Design:** Automates pole compensation ($C_f$) for high-current buffers (ADA4870) and matches input bias currents under strict headroom/power constraints.
+* **Custom SPICE Automation Engine:** No GUI needed. Runs headless LTspice simulations, sweeps frequency grids, and extracts raw Fourier data from log files.
+* **Native `.asc` Graph Parser:** Built a robust text parser that bypasses the limitations of standard LTspice netlists. It auto-detects binary encodings (UTF-16LE/ASCII) and reconstructs the circuit graph by binding symbol pins to topological nets.
+the story of how it was once misdiagnosed precisely due to the lack of such a tool).
 
 ## What the Signal Path Actually Does
 
